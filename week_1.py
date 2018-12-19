@@ -3,8 +3,9 @@ from random import randint
 from itertools import product
 
 def merge(A: list, i: int , j: int, k: int):
-    """Combine/Merge step of mergesort∫.
-    A is an list.  A[i:j] and A[j+1,k] are sorted
+    """Combine/Merge step of mergesort.
+    Args:
+        A (list):  A[i:j] and A[j+1:k] are sorted.
     """
     ind_left = 0
     ind_right =  1
@@ -72,7 +73,7 @@ def kzb(x: int, y: int):
 
 
 def test_mergesort():
-    print("Testint mergesort algorithm")
+    print("Testing mergesort algorithm")
     for i in range(1,11):
         A = [randint(0, 20) for _ in range(i)]
         merge_sort(A, lower_bound=0, upper_bound=len(A)-1)
