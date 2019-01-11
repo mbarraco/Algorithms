@@ -12,28 +12,25 @@ def merge_and_count(A: list, i: int , j: int, k: int):
     pivot_array = []
     inversion_count = 0
 
-
+    # While none of the moving indexes exceeds the current-subarray halves
     while i + ind_left <= j and j + ind_right <= k:
+
         if A[j + ind_right] < A[i + ind_left]:
             pivot_array.append(A[j + ind_right])
             ind_right += 1
 
-            if i == j:
-                inversion_count += 1
-            else:
-                inversion_count += j - (i + ind_left) + 1 if j - (i + ind_left) > 0 else 0
+            inversion_count += j -i - ind_left +1
+
 
         else:
             pivot_array.append(A[i + ind_left])
             ind_left += 1
 
+    # Left side is empty (see previous while block condition)
     if j + ind_right <= k:
         while j + ind_right <= k:
             pivot_array.append(A[j + ind_right])
             ind_right += 1
-
-            inversion_count += j - (i + ind_left) + 1 if j - (i + ind_left) > 0 else 0
-
     else:
         while i + ind_left <= j:
             pivot_array.append(A[i + ind_left])
@@ -57,12 +54,21 @@ def count_and_sort(A: list, lower_bound: list, upper_bound: list):
         return 0
 
 
-def test_inversion_count():
+def test_inversion_count(A: list):
     """TODO: write a proper test considering cornercases"""
     print("Testing inversion count")
-    A = [1,2,3,4,1,6,7,0]
+    if not A:
+        A = [1,2,3,4,1,6,7,0]
     inversion_count = count_and_sort(A, lower_bound=0, upper_bound=len(A)-1)
     print(f"Inversion count = {inversion_count}")
 
 if __name__ == "__main__":
-    test_inversion_count()
+
+    with open('/Users/mm/code/algorithms/integer_array_inversion.txt') as infile:
+        data = [int(n) for n in infile]
+
+    # data = [100, 1, 20, 3, 2, 2, 5, 50]
+    # data = [100, 1, 20, 3]
+
+    test_inversion_count(data)
+    # print(data)
